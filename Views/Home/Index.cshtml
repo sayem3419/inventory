@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@using inventory.Models
+<script>
+    function ShowEquipmentEntryModel()
+    {
+        $('#dvEquipmentEntryPanel').dialog({
+            height: 400,
+            width: 350,
+            modal: true
+        });
+    }
+</script>
+
+<div class="row">
+    <div class="col col-6">
+        <div class="card text-center">
+            <div class="card-header">
+                List equipment
+                <button class="btn btn-primary" style="float:right" onclick="return ShowEquipmentEntryModel()">+</button>
+            </div>
+            <div class="card-body">
+                <div style="border:1px solid #bbff00;max-height:380px;overflow-y:auto">
+                    <table style="width:100%">
+                        <tr style="background:aliceblue">
+                            <th style="display:none">
+                                ID
+                            </th>
+                            <th> Name</th>
+                            <th> Count</th>
+                            <th> EntryDate</th>
+                        </tr>
+                        @{
+                            List<Equipment> equipment = Equipment.ListEquipment();
+                            foreach (Equipment obj in equipment)
+                            {
+                                <tr>
+                                    <td style="display:none">@obj.Equipmentid</td>
+                                    <td>@obj.Name</td>
+                                    <td>@obj.count</td>
+                                    <td>@obj.EntryDate</td>
+                                </tr>
+
+                            }
+                        }
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col col-6">
+        <div class="card text-center">
+            <div class="card-header">
+                Assigned Equipment list
+                <button class="btn btn-primary" style="float:right" onclick="return ShowEquipmentEntryModel()">+</button>
+            </div>
+            <div class="card-body">
+                <div style="border:1px solid #bbff00;max-height:380px;overflow-y:auto">
+                    <table style="width:100%">
+                        <tr style="background:aliceblue">
+                            <th style="display:none">
+                                ID
+                            </th>
+                            <th> Name</th>
+                            <th> Member Name</th>
+                            <th> Mobile Number</th>
+                        </tr>
+                        @{
+                            List<Equipment> AssignedList = Equipment.ListAssignedEquipment();
+                            foreach (Equipment obj in AssignedList)
+                            {
+                                <tr>
+                                    <td style="display:none">@obj.Equipmentid</td>
+                                    <td>@obj.Name</td>
+                                    <td>@obj.count</td>
+                                    <td>@obj.EntryDate</td>
+                                </tr>
+
+                            }
+                        }
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("~/Views/Home/_PartialEquipment.cshtml")
